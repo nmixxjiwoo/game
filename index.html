@@ -1,0 +1,122 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retro Shooting Target</title>
+
+  <!-- 아케이드 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Russo+One&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- 왼쪽 서부 안내판 -->
+    <aside class="info-panel collapsed" id="infoPanel">
+      <div class="info-toggle" id="infoToggle">
+        ☰<br />HELP
+      </div>
+
+      <div class="info-inner">
+        <h2>보안관 지침서</h2>
+
+        <section class="info-section">
+          <h3>조작 방법</h3>
+          <ul>
+            <li><span class="key">MOUSE</span> 로 나무 과녁을 클릭해 사격해라</li>
+            <li>다이너마이트 폭탄은 절대 건드리지 마라, 목숨 걸고 피하도록.</li>
+            <li>라운드 시간은 30초, 그 안에 최고 점수를 노려라 카우보이.</li>
+          </ul>
+        </section>
+
+        <section class="info-section">
+          <h3>점수 규칙</h3>
+          <ul>
+            <li>나무 과녁 일반 명중: <span class="plus">+1점</span></li>
+            <li>과녁 중앙 헤드샷: <span class="plus">+3점</span></li>
+            <li>콤보 10 이상 유지: 추가 <span class="plus">+1점</span></li>
+            <li>콤보 20 이상 유지: 추가 <span class="plus">+2점</span></li>
+            <li>폭탄 명중 시: 현재 점수의 <span class="minus">-30%</span></li>
+            <li>폭탄 명중 시: HP <span class="minus">-1</span>, 콤보 리셋</li>
+            <li>빗맞추면: 콤보 리셋 (점수 변화 없음)</li>
+          </ul>
+        </section>
+
+        <section class="info-section">
+          <h3>랭크 체계</h3>
+          <ul class="rank-list">
+            <li><span class="rank rank-s">S</span> 전설의 총잡이 – 200점 이상</li>
+            <li><span class="rank rank-a">A</span> 베테랑 사수 – 150 ~ 199점</li>
+            <li><span class="rank rank-b">B</span> 숙련된 보안관 – 100 ~ 149점</li>
+            <li><span class="rank rank-c">C</span> 초보 카우보이 – 50 ~ 99점</li>
+            <li><span class="rank rank-d">D</span> 사격장 수습 – 0 ~ 49점</li>
+          </ul>
+          <p class="info-note">
+            높은 콤보(25+)를 쌓으면 랭크가 한 단계 오를 수 있다.
+          </p>
+        </section>
+
+        <section class="info-section">
+          <h3>보너스 팁</h3>
+          <ul>
+            <li>점수가 높아질수록 폭탄 페널티가 커진다, 서부의 법칙이다.</li>
+            <li>막판에는 안전 사격과 폭탄 회피가 핵심이다, 살아남아라.</li>
+            <li>헤드샷과 콤보를 동시에 노려 최고 랭크에 도전해라, 레전드.</li>
+          </ul>
+        </section>
+      </div>
+    </aside>
+
+    <!-- 오른쪽 게임 영역 -->
+    <div class="game-wrapper">
+      <h1>Retro Shooting Target</h1>
+
+      <div class="hud">
+        <div>점수: <span id="score">0</span></div>
+        <div>콤보: <span id="combo">0</span> (MAX <span id="maxCombo">0</span>)</div>
+        <div>시간: <span id="time">30</span>s</div>
+        <div>HP: <span id="life">5</span></div>
+        <button id="restartBtn">RESTART</button>
+        <button id="muteBtn">MUTE</button>
+        <input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="volume" />
+        <span id="volumeIcon" class="vol-icon" aria-hidden="true">🔊</span>
+        <span id="volumeValue" class="vol-value">100%</span>
+      </div>
+
+      <div id="scene">
+        <div id="gun">
+          <div class="barrel"></div>
+        </div>
+        <div id="target"></div>
+        <div id="bomb"></div>
+      </div>
+
+      <p class="help">
+        나무 과녁은 기본 +1점, 중앙 헤드샷은 +3점이다, 총잡이. 다이너마이트 폭탄을 맞히면 HP와 점수가 줄어들 테니 조심해라, 파트너.
+      </p>
+    </div>
+  </div>
+
+  <!-- 결과 오버레이 -->
+  <div id="resultOverlay" class="hidden">
+    <div class="result-card">
+      <h2>RESULT</h2>
+      <p>최종 점수: <span id="finalScore"></span></p>
+      <p>남은 HP: <span id="finalLife"></span></p>
+      <p>최고 콤보: <span id="finalMaxCombo"></span></p>
+      <p>랭크: <span id="finalRank"></span></p>
+      <p class="comment" id="finalComment"></p>
+      <button id="resultRestart">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <audio id="bgm" src="../High Noon Shadows.mp3" preload="auto" loop></audio>
+  <script src="script.js"></script>
+</body>
+</html>
